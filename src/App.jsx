@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Appointment from "./components/Appointment";
+
 function App() {
   const [appointments, setAppointments] = useState([]);
   const addAppointment = () => {
@@ -8,7 +10,7 @@ function App() {
       name,
       done: false,
     };
-    setAppointments([...appointments, newAppointment])
+    setAppointments([...appointments, newAppointment]);
   };
 
   return (
@@ -17,10 +19,14 @@ function App() {
       <div className="day">
         <h2>Segunda-Feira</h2>
         <ul>
-          {appointments.map((appointment) => (
-            <li key={appointment.id}>{appointment.name}</li>
+          {appointments.map( appointment => (
+            <Appointment 
+            key={Appointment.id} 
+            appointment={appointment}
+             />
           ))}
         </ul>
+
         <button onClick={addAppointment}>Adicionar</button>
       </div>
     </main>
