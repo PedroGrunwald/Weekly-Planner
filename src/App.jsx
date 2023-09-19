@@ -10,8 +10,20 @@ function App() {
       name,
       done: false,
     };
-    setAppointments([...appointments, newAppointment]);
+    setAppointments((currentState) => [...currentState, newAppointment]);
   };
+
+  const toggleDone = (appointmentId) => {
+    setAppointments((currentState) =>
+      currentState.map((appointment) => {
+        if (appointment.id !== appointmentId) 
+        return appointment;
+        else
+         return {...appointment, done: !appointment.done};
+      })
+    );
+  };
+
 
   return (
     <main>
@@ -19,14 +31,10 @@ function App() {
       <div className="day">
         <h2>Segunda-Feira</h2>
         <ul>
-          {appointments.map( appointment => (
-            <Appointment 
-            key={Appointment.id} 
-            appointment={appointment}
-             />
+          {appointments.map((appointment) => (
+            <Appointment key={Appointment.id} appointment={appointment} />
           ))}
         </ul>
-
         <button onClick={addAppointment}>Adicionar</button>
       </div>
     </main>
